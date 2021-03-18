@@ -1,11 +1,10 @@
 from iolib import Stuff
 
 
-def dump_text_by_id(lang_id: int, table_id: int):
-    data = Stuff.load_json("dump.json")
-    Stuff.dump_json(f'lang{lang_id}_table{table_id}_text.json',
-                    data['languages'][lang_id]['tables'][table_id]['text'], 2)
+def get_text_by_id(dump_file: str, lang_id: int, table_id: int):
+    data = Stuff.load_json(dump_file)
+    return data['languages'][lang_id]['tables'][table_id]['text']
 
 
-# Main
-dump_text_by_id(2, 0)
+data = get_text_by_id("files\\dump.json", 2, 0)
+print(data)
