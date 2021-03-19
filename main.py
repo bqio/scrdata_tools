@@ -284,7 +284,9 @@ def unpack():
         global langRelativeOfs
         langRelativeOfs = r.tell()
         file['languages'].append(unpack_language())
-    Stuff.dump_json("dump.json", file)
+    print('Saving as json...')
+    Stuff.dump_json("files\\dump.json", file)
+    print('Done.')
 
 def pack_default_ptrs_table(ptrs_table):
     for i in range(len(ptrs_table)):
@@ -394,43 +396,51 @@ def pack_t6_text_table(tt):
             w.write_nt_utf8_str(tt[i][j])
 
 def pack_t0(t):
+    print('Importing table 0...')
     pack_default_table_header(t['header'])
     pack_t0_ptrs_table(t['textPtrs'])
     pack_t0_text_table(t['text'])
 
 def pack_t1(t):
+    print('Importing table 1...')
     pack_default_table_header(t['header'])
     pack_t1_ptrs_table(t['textPtrs'])
     pack_t1_text_table(t['text'])
 
 def pack_t2(t):
+    print('Importing table 2...')
     pack_default_table_header(t['header'])
     pack_t2_ptrs_table(t['textPtrs'])
     pack_t1_text_table(t['text'])
 
 def pack_t3(t):
+    print('Importing table 3...')
     pack_default_table_header(t['header'])
     w.skip(3)
     pack_t3_ptrs_table(t['textPtrs'])
     pack_t3_text_table(t['text'])
 
 def pack_t4(t):
+    print('Importing table 4...')
     pack_default_table_header(t['header'])
     pack_t4_ptrs_table(t['textPtrs'])
     pack_t4_text_table(t['text'])
 
 def pack_t5(t):
+    print('Importing table 5...')
     pack_default_table_header(t['header'])
     pack_t4_ptrs_table(t['textPtrs'])
     pack_t4_text_table(t['text'])
 
 def pack_t6(t):
+    print('Importing table 6...')
     pack_default_table_header(t['header'])
     w.skip(1)
     pack_t6_ptrs_table(t['textPtrs'])
     pack_t6_text_table(t['text'])
 
 def pack_t7(t):
+    print('Importing table 7...')
     pack_default_table_header(t['header'])
     w.skip(1)
     pack_t7_ptrs_table(t['textPtrs'])
@@ -458,10 +468,12 @@ def pack():
     w.write_u32(j['header']['numOfLang'])
     pack_default_ptrs_table(j['langPtrs'])
     for i in range(j['header']['numOfLang']):
+        print(f'Importing language {i}...')
         w.seek(j['langPtrs'][i][0])
         global langRelativeOfs
         langRelativeOfs = w.tell()
         pack_language(j['languages'][i])
+    print('Done.')
 
 print("scrdata tools\nby bqio 2021")
 
