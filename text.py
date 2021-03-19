@@ -4,7 +4,6 @@ class Text:
     def __init__(self, data):
         self.data = data
         self.unique_strings = []
-    
     def __get_line_indexes(self, line):
         indexes = []
         for r in range(len(self.data)):
@@ -12,7 +11,6 @@ class Text:
                 if self.data[r][c] == line:
                     indexes.append([r, c])
         return indexes
-
     def make_meta(self):
         ptrs = []
         unique_strings = []
@@ -27,7 +25,6 @@ class Text:
                     ptrs.append(ptr)
                     unique_strings.append(self.data[r][c])
         return ptrs
-    
     def merge_meta(self, meta):
         for i in range(len(meta)):
             line = meta[i]['line']
@@ -53,9 +50,10 @@ class Language:
 class File:
     def __init__(self, dump):
        self.dump = dump
-    
     def get_language_by_id(self, id: int):
         return Language(self.dump['languages'][id])
+    def apply_changes(self): # TODO fix ptrs, size and other fields for actual text in tables
+        pass
 
 
 file = File(Stuff.load_json("files\\dump.json"))
