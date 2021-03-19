@@ -59,8 +59,8 @@ class File:
 
 
 file = File(Stuff.load_json("files\\dump.json"))
-
 eng_eu_lang = file.get_language_by_id(2)
 
-text = eng_eu_lang.get_table_by_id(0).get_text()
-Stuff.dump_json("out.json", text.merge_meta(Stuff.load_json("files\\meta0.json")))
+for i in range(7):
+    text = eng_eu_lang.get_table_by_id(i).get_text()
+    Stuff.dump_json(f'files\\meta_{i}', text.make_meta())
