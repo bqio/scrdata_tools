@@ -485,6 +485,6 @@ if args.u:
 
 if args.p:
     w = Writer(open('files\\scrdata_n.bin', 'wb'))
-    j = Stuff.load_json('files\\dump.json')
+    j = Stuff.load_json(args.file)
     pack()
     w.close()
